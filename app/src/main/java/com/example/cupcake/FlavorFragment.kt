@@ -19,7 +19,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -32,14 +31,15 @@ import com.example.cupcake.model.OrderViewModel
 class FlavorFragment : Fragment() {
 
     private val sharedViewModel: OrderViewModel by activityViewModels()
+
     // Binding object instance corresponding to the fragment_flavor.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
     private var binding: FragmentFlavorBinding? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val fragmentBinding = FragmentFlavorBinding.inflate(inflater, container, false)
         binding = fragmentBinding
@@ -48,7 +48,7 @@ class FlavorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title  = getString(R.string.choose_flavor)
+        activity?.title = getString(R.string.choose_flavor)
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel

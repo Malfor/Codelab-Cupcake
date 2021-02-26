@@ -17,11 +17,9 @@ package com.example.cupcake
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -35,14 +33,15 @@ import com.example.cupcake.model.OrderViewModel
 class SummaryFragment : Fragment() {
 
     private val sharedViewModel: OrderViewModel by activityViewModels()
+
     // Binding object instance corresponding to the fragment_summary.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
     private var binding: FragmentSummaryBinding? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val fragmentBinding = FragmentSummaryBinding.inflate(inflater, container, false)
         binding = fragmentBinding
@@ -77,7 +76,7 @@ class SummaryFragment : Fragment() {
                 .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order))
                 .putExtra(Intent.EXTRA_TEXT, orderSummary)
 
-        if (activity?.packageManager?.resolveActivity(intent, 0) != null){
+        if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
             startActivity(intent)
         }
     }

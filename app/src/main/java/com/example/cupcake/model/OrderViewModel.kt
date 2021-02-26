@@ -23,9 +23,10 @@ class OrderViewModel : ViewModel() {
     val date: LiveData<String> get() = _date
 
     private val _price = MutableLiveData<Double>()
-    val price: LiveData<String> get() = Transformations.map(_price){
-        NumberFormat.getCurrencyInstance().format(it)
-    }
+    val price: LiveData<String>
+        get() = Transformations.map(_price) {
+            NumberFormat.getCurrencyInstance().format(it)
+        }
 
     val dateOptions = getPickupOptions()
 
@@ -33,23 +34,23 @@ class OrderViewModel : ViewModel() {
         resetOrder()
     }
 
-    fun resetOrder(){
+    fun resetOrder() {
         _quantity.value = 0
         _flavor.value = ""
         _date.value = dateOptions[0]
         _price.value = 0.0
     }
 
-    fun setQuantity(numberCupcakes: Int){
+    fun setQuantity(numberCupcakes: Int) {
         _quantity.value = numberCupcakes
         updatePrice()
     }
 
-    fun setFlavor(desiredFlavor: String){
+    fun setFlavor(desiredFlavor: String) {
         _flavor.value = desiredFlavor
     }
 
-    fun setDate(pickupDate: String){
+    fun setDate(pickupDate: String) {
         _date.value = pickupDate
         updatePrice()
     }
@@ -62,16 +63,16 @@ class OrderViewModel : ViewModel() {
         val options = mutableListOf<String>()
         val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
         val calendar = Calendar.getInstance()
-        repeat(4){
+        repeat(4) {
             options.add(formatter.format(calendar.time))
             calendar.add(Calendar.DATE, 1)
         }
         return options
     }
 
-    private fun updatePrice(){
+    private fun updatePrice() {
         var calculePrice = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
-        if (dateOptions[0] == _date.value){
+        if (dateOptions[0] == _date.value) {
             calculePrice += PRICE_FOR_SAME_DAY_PICKUP
         }
         _price.value = calculePrice
